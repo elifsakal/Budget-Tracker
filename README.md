@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Budget Tracker App 📊
+Bu proje, kullanıcıların farklı kategorilerde bütçe limitleri belirlemelerine, mevcut harcamaları takip etmelerine ve bütçeleri aşmaları durumunda uyarı almalarına olanak tanıyan bir bütçe takip uygulamasıdır. Proje, React ve Context API kullanılarak geliştirilmiştir.
 
-## Getting Started
+Özellikler
+Kullanıcılar farklı kategoriler için bütçe limiti ekleyebilir.
+Eklenen limitler listelenir ve gerekirse silinebilir.
+Harcamalar, belirlenen bütçe limitleriyle karşılaştırılarak limit aşımı kontrol edilir.
+Limitin %80'ine yaklaşıldığında veya aşıldığında uyarı mesajı gösterilir.
+Veriler LocalStorage'a kaydedilerek sayfa yenilense bile kalıcı hale getirilir.
 
-First, run the development server:
+Kurulum ve Çalıştırma
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Depoyu Klonlayın
+git clone https://github.com/elifsakal/budget-tracker-app.git
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Proje Dizinine Geçin
+cd budget-tracker-app
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Gerekli Bağımlılıkları Yükleyin
+npm install
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Uygulamayı Başlatın
+npm start
 
-## Learn More
+Uygulama, varsayılan olarak http://localhost:3000 adresinde çalışacaktır.
 
-To learn more about Next.js, take a look at the following resources:
+Kullanım
+1. Kategori ve Limit Belirleme
+Adımlar:
+Budget Limit (Bütçe Limiti) sayfasına gidin.
+Bu sayfa, src/app/budgetLimit/page.tsx altında tanımlıdır.
+"Kategori" ve "Limit" alanlarına, belirli bir harcama kategorisi (örneğin, "Eğitim") ve bu kategori için belirlediğiniz limit miktarını girin.
+"Ekle" butonuna tıklayın.
+Eklediğiniz kategori ve limit, aşağıda bir liste olarak görüntülenecektir.
+2. Limit Silme
+Adımlar:
+Eklenen kategorilerin listesi, Budget Limit sayfasında gösterilir.
+Listede, her kategorinin yanında bir "Sil" butonu bulunur.
+Silmek istediğiniz kategorinin yanındaki "Sil" butonuna tıklayın.
+Kategori ve limiti hem listeden hem de local storage'dan kaldırılır.
+3. Limit Aşımı Kontrolü
+Özellikler:
+Belirlediğiniz kategorideki harcamalar, belirlenen limitin %80'ine yaklaştığında kırmızı bir uyarı mesajı görüntülenir.
+Limit aşımı veya yaklaşımı olduğunda uyarılar, sayfa yenilendiğinde de korunur.
+Bu durum, local storage kullanılarak yönetilir.
+4. İşlemler ve Grafikler
+İşlemler, Transactions (İşlemler) sayfasında eklenip yönetilir.
+Bu sayfa src/app/transactions/page.tsx altında bulunur.
+Eklediğiniz harcamalar kategorilere atanır.
+Charts (Grafikler) sayfası üzerinden harcama trendlerini ve kategorik harcamaları görselleştirebilirsiniz.
+Bu sayfa, src/app/charts/page.tsx altında yer alır.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+Proje Yapısı
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+src/
+├── app/                             # Sayfa ve route yapılarını içerir (Next.js kullanımı için).
+│   ├── budgetLimit/                 # Bütçe limiti ile ilgili sayfa ve işlemler.
+│   │   └── page.tsx                 # Bütçe limiti ayarlama ve gösterim sayfası.
+│   ├── charts/                      # Grafiklerle ilgili sayfa.
+│   │   └── page.tsx                 # Harcama ve trend grafikleri sayfası.
+│   ├── features/                    # Özel özelliklere ait sayfa.
+│   │   └── page.tsx                 # Özellikler sayfası.
+│   ├── savingRecommendation/        # Tasarruf önerileri ile ilgili sayfa.
+│   │   └── page.tsx                 # Kullanıcıya tasarruf önerileri sunan sayfa.
+│   ├── transactions/                # İşlemlerle ilgili sayfa ve layout.
+│   │   ├── layout.tsx               # İşlem sayfasının genel layout dosyası.
+│   │   └── page.tsx                 # İşlemleri listeleme ve yönetme sayfası.
+│   └── page.tsx                     # Ana sayfa (root route).
+│
+├── components/                      # Yeniden kullanılabilir React bileşenleri.
+│   ├── charts/                      # Grafik bileşenleri.
+│   │   ├── ExpenseChart.tsx         # Harcama kategorilerine göre grafik.
+│   │   └── TransactionTrendChart.tsx# İşlem trend grafiği bileşeni.
+│   ├── forms/                       # Formlarla ilgili bileşenler.
+│   │   ├── BudgetLimitForm.tsx      # Bütçe limiti ayarlama formu.
+│   │   └── TransactionForm.tsx      # Yeni işlem ekleme formu.
+│   ├── lists/                       # Listeleme bileşenleri.
+│   │   ├── TransactionList.tsx      # İşlem listesini gösteren bileşen.
+│   │   └── DownloadReport.tsx       # Rapor indirme işlemi için bileşen.
+│   ├── Header.tsx                   # Uygulamanın üstbilgi (header) bileşeni.
+│   └── SavingsRecommendation.tsx    # Tasarruf önerilerini gösteren bileşen.
+│
+├── context/                         # Uygulama genelindeki durumu yöneten Context API dosyaları.
+│   ├── BudgetContext.tsx            # Harcamalarla ilgili durum yönetimi.
+│   └── BudgetLimitsContext.tsx      # Bütçe limitleriyle ilgili durum yönetimi.
+│
+├── styles/                          # CSS ve stil dosyaları.
+│   └── globals.css                  # Uygulama genelindeki stil tanımlamaları.
+└── /
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+Teknolojiler
+
+React: Kullanıcı arayüzü oluşturmak için.
+TypeScript: Daha güçlü bir yazım desteği için.
+Context API: Durum yönetimi için.
+LocalStorage: Verilerin kalıcı olarak saklanması için.
