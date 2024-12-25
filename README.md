@@ -1,4 +1,5 @@
 Budget Tracker App 📊
+
 Bu proje, kullanıcıların farklı kategorilerde bütçe limitleri belirlemelerine, mevcut harcamaları takip etmelerine ve bütçeleri aşmaları durumunda uyarı almalarına olanak tanıyan bir bütçe takip uygulamasıdır. Proje, React ve Context API kullanılarak geliştirilmiştir.
 
 Özellikler
@@ -11,7 +12,7 @@ Veriler LocalStorage'a kaydedilerek sayfa yenilense bile kalıcı hale getirilir
 Kurulum ve Çalıştırma
 
 1. Depoyu Klonlayın
-git clone https://github.com/elifsakal/budget-tracker-app.git
+git clone https://github.com/elifsakal/budget-tracker.git
 
 2. Proje Dizinine Geçin
 cd budget-tracker-app
