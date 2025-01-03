@@ -15,7 +15,7 @@ Kurulum ve Çalıştırma
 git clone https://github.com/elifsakal/budget-tracker.git
 
 2. Proje Dizinine Geçin
-cd budget-tracker-app
+cd budget-tracker
 
 3. Gerekli Bağımlılıkları Yükleyin
 npm install
